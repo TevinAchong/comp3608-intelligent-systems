@@ -1,0 +1,40 @@
+int: num_locations;
+int: num_neighbors;
+
+% Let us just have a standard price for each cell for calculation purposes
+% Costs
+array[1..num_locations] of int: costs;
+
+% The locations and their covered neighbors 
+% A 2D Array
+% locs[1][1] == 0 indicates that location 1 does not cover neighbor 1
+% locs[1][1] == 1 indicates that location 1 covers neighbor 1
+array[1..num_locations, 1..num_neighbors] of 0..1: ln;
+
+% Which alternative to choose (decision variable)
+array[1..num_locations] of var 0..1: x;
+
+% The objective to minimize
+var int: obj = sum(i in 1..num_locations)(x[i]*costs[i]);
+
+solve minimize obj;
+
+constraint forall(j in 1..num_neighbors)(sum(i in 1..num_locations)(x[i]*ln[i, j]) >= 1);
+
+num_locations = 7;
+costs = [1, 1, 1, 1, 1, 1, 1];
+num_neighbors = 15;
+ln = array2d(1..num_locations, 1..num_neighbors,
+    [
+      1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0,
+      0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0,
+      0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+    ]);
+
+output [
+  "x:" ++ show(x) ++ "\n"
+];
