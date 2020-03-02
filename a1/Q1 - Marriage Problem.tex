@@ -1,0 +1,100 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{float}
+
+% Libraries for drawing search tree
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\tikzstyle{level 1}=[level distance=3.5cm, sibling distance=6cm]
+\tikzstyle{level 2}=[level distance=3.5cm, sibling distance=6cm]
+\tikzstyle{bag} = [align=center, style={rectangle, draw=black}]
+\tikzstyle{nope} = [label=below:\Large{{\color{red}X}}]
+\tikzstyle{circ} = [align=center, style={circle, draw=black}]
+
+\usepackage{adjustbox}
+\usepackage{forest}
+\usepackage{tikz-qtree,tikz-qtree-compat}
+
+
+\begin{document}
+\pagenumbering{roman}
+\title{
+		\textbf{Student Name:} Tevin Achong\\
+		\textbf{Student ID:} 816000026\\
+		\textbf{Student Name:} Raeanne Ramharrack\\
+		\textbf{Student ID:} 816008940\\						
+		\textbf{Course Code:} COMP3608\\
+		\textbf{Course Title:} Intelligent Systems\\
+		\textbf{Assignment:} 1
+		\date{March 1st, 2020}
+}
+\maketitle
+
+\newpage
+\pagenumbering{arabic}
+
+\begin{center}
+	\textbf{Question 1}
+\end{center}
+For this question, we let $w_i$ indicate the $ith$ woman, and $m_i$ indicate the $ith$ man. The notation $w_im_i$ indicates that the $ith$ woman marries the $ith$ man. For example, $w_2m_3$ would indicate that the 2nd woman marries the 3rd man. The following search tree is derived for the Hall's Marriage Problem with:
+\begin{center}
+$w_0$ having preferences $m_0, m_1, m_2$\\
+$w_1$ having preferences $m_0, m_3, m_5$\\
+$w_2$ having preferences $m_2, m_5$
+\end{center}
+
+
+\begin{adjustbox}{width=\linewidth}
+\begin{tikzpicture}[sloped]
+	\node[bag] {{\color{blue}0}\\ $w_0m_0$}
+    	child {
+			node[bag, label=below:\Large{{\color{red}X}}] {{\color{blue}1}\\$w_1m_0$}
+		}		
+		child {
+			node[bag, label=below:\Large{{\color{red}X}}] {{\color{blue}2}\\$w_1m_1$}
+		}
+		child {
+			node[bag, label=below:\Large{{\color{red}X}}] {{\color{blue}3}\\$w_1m_2$}
+		}
+		child {
+			node[bag] {{\color{blue}4}\\$w_1m_3$}
+				child {
+					node[bag, label=below:\Large{{\color{red}X}}] {{\color{blue}5}\\$w_2m_0$}
+				}
+				child {
+					node[bag, label=below:\Large{{\color{red}X}}] {{\color{blue}6}\\$w_2m_1$}
+				}
+				child {
+					node[bag, label=below:\Large{Solution Found}] {{\color{blue}7}\\$w_2m_2$}
+				}
+		};
+\end{tikzpicture}
+\end{adjustbox}
+
+Explanation:
+\begin{enumerate}
+\item
+Node 0: We try $w_0m_0$. Since $m_0$ is in the set of preferences of $w_0$ and no $w$ has yet married $m_0$ we continue down this path.
+\item
+Node 1: We try $w_1m_0$. This cannot work because even though $m_0$ is in the set of preferences of $w_1$, $w_0$ has already married $m_0$, so we abort this path.
+\item
+Node 2: We try $w_1m_1$. This cannot work since $m_1$ is not in the set of preferences of $w_1$, so we abort this path.
+\item
+Node 3: We try $w_1m_2$. This cannot work since $m_2$ is not in the set of preferences of $w_1$, so we abort this path.
+\item
+Node 4: We try $w_1m_3$. Since $m_3$ is in the set of preferences of $w_1$ and no $w$ has yet married $m_3$ we continue down this path.
+\item
+Node 5: We try $w_2m_0$. This cannot work since $m_0$ is not in the set of preferences of $w_2$, and $w_0$ has already married $m_0$, so we abort this path.
+\item
+Node 6: We try $w_2m_1$. This cannot work since $m_1$ is not in the set of preferences of $w_2$, so we abort this path.
+\item
+Node 7: We try $w_2m_2$. Since $m_2$ is in the set of preferences of $w_2$ and no $w$ has yet married $m_2$ we accept this pair. And since all women have been paired with a man, this is our solution.
+\end{enumerate}
+
+\textbf{Solution:} $w_0m_0$, $w_1m_3$, $w_2m_2$.
+
+
+\end{document}
