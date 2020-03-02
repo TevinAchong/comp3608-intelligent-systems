@@ -1,3 +1,6 @@
+#816008940 Raeanne Ramharrack
+#816000026 Tevin Achong
+
 int: num_locations = 7;
 int: num_neighbors = 15;
 
