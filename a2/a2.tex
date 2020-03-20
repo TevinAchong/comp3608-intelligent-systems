@@ -1,0 +1,152 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{float}
+
+% Libraries for drawing search tree
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\tikzstyle{level 1}=[level distance=3.5cm, sibling distance=6cm]
+\tikzstyle{level 2}=[level distance=3.5cm, sibling distance=6cm]
+\tikzstyle{bag} = [align=center, style={rectangle, draw=black}]
+\tikzstyle{nope} = [label=below:\Large{{\color{red}X}}]
+\tikzstyle{circ} = [align=center, style={circle, draw=black}]
+
+\usepackage{adjustbox}
+\usepackage{forest}
+\usepackage{tikz-qtree,tikz-qtree-compat}
+
+
+\begin{document}
+\pagenumbering{roman}
+\title{
+		\textbf{Student Name:} Tevin Achong\\
+		\textbf{Student ID:} 816000026\\
+		\textbf{Student Name:} Name 2\\
+		\textbf{Student ID:} ID2\\			
+		\textbf{Student Name:} Name 3\\
+		\textbf{Student ID:} ID3\\			
+		\textbf{Course Code:} COMP3608\\
+		\textbf{Course Title:} Intelligent Systems\\
+		\textbf{Assignment:} 2
+		\date{March 21st, 2020}
+}
+\maketitle
+
+\newpage
+\pagenumbering{arabic}
+
+\begin{center}
+	\textbf{Part 3 - Encoding Features}
+\end{center}
+
+Since most machine learning algorithms (e.g. Linear Regression) require that input data be numerical, we would want to represent all our data in the dataset numerically so that we could apply an appropriate algorithm to it.\\
+
+The following features are quantitative, i.e. regular numerical data. As such, they will be represented as decimal values in our feature vector:
+\begin{itemize}
+\item
+\textbf{price} - price in US dollars
+\item
+\textbf{carat} - weight of the diamond
+\item
+\textbf{x} - length in mm
+\item
+\textbf{y} - width in mm
+\item
+\textbf{z} - depth in mm
+\item
+\textbf{depth} - total depth percentage
+\item
+\textbf{table} - width of top of diamond relative to widest point
+\end{itemize}
+
+The following features are categorical, i.e. label data. Furthermore, they are each ordinal, meaning that the ordering of the labels is significant and cannot be ignored. As such, we will use \textbf{ordinal encoding} to represent them:
+\begin{itemize}
+\item
+\textbf{cut} - quality of the cut
+\begin{itemize}
+\item
+Fair - 1
+\item
+Good - 2
+\item
+Very Good - 3
+\item
+Premium - 4
+\item
+Ideal - 5
+\end{itemize}
+
+\item
+\textbf{color} - diamond color
+\begin{itemize}
+\item
+J - 1
+\item
+I - 2
+\item
+H - 3
+\item
+G - 4
+\item
+F - 5
+\item
+E - 6
+\item
+D - 7
+\end{itemize}
+
+\item
+\textbf{clarity} - a measurement of how clear the diamond is
+\begin{itemize}
+\item
+I1 - 1
+\item
+SI2 - 2
+\item
+SI1 - 3
+\item
+VS2 - 4
+\item
+VS1 - 5
+\item
+VVS2 - 6
+\item
+VVS1 - 7
+\item
+IF - 8
+\end{itemize}
+\end{itemize} 
+
+Each possible value for each ordinal feature above is given a value relative to the other possible values for that specific feature.\\
+
+For example, a diamond
+\begin{itemize}
+\item
+\textbf{carat} - 0.23
+\item
+\textbf{cut} - Ideal
+\item
+\textbf{color} - E
+\item
+\textbf{clarity} - SI2
+\item
+\textbf{depth} - 61.5
+\item
+\textbf{table} - 55
+\item
+\textbf{price} - 326
+\item
+\textbf{x} - 3.95
+\item
+\textbf{y} - 3.98
+\item
+\textbf{z} - 2.43
+
+\end{itemize}
+
+will have feature vector $[0.23, 5, 6, 2, 61.5, 55, 326, 3.95, 3.98, 2.43]$
+
+\end{document}
